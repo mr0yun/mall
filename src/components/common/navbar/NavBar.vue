@@ -19,7 +19,7 @@ export default {
     line-height: 2.75rem;
     height: 2.75rem;
     text-align: center;
-    box-shadow: 0 2px 2px rgb(233, 233, 233);
+    /* box-shadow: 0 1.5px 1px rgb(90, 90, 90); */
   }
   .left, .right{
     width: 3.75rem;

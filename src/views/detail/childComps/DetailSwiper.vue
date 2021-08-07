@@ -1,9 +1,7 @@
 <template>
-  <swiper>
-    <swiper-item v-for="item in banners" :key="item.acm" class="swiper-item">
-      <a :href="item.link">
-        <img :src="item.image" alt="" @load="imgLoad">
-      </a>
+  <swiper class="detail-swiper">
+    <swiper-item v-for="item in banners" :key="item" class="swiper-item">
+      <img :src="item" alt="" @load="imgLoad">
     </swiper-item>
   </swiper>
 </template>
@@ -11,7 +9,7 @@
 <script>
 import {Swiper, SwiperItem} from 'components/common/swiper'
 export default {
-  name: 'HomeSwiper',
+  name: 'DetailSwiper',
   components:{
     Swiper,
     SwiperItem
@@ -37,17 +35,12 @@ export default {
       }
     }
   },
-
 }
 </script>
 
 <style scoped>
-  swiper{
-    width: 100%;
+  .detail-swiper{
+    height: 20rem;
     overflow: hidden;
-  }
-
-  .swiper-item img{
-    width: 100%;
   }
 </style>

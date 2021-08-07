@@ -30,6 +30,10 @@ export default {
     text-align: center;
     padding: 0.6rem 0 1.2rem;
     border-bottom: 0.5rem solid #eee;
+    background-color: white;
+  }
+  .recommend-item{
+    flex: 1;
   }
   .recommend-item img{
     width: 90%;
