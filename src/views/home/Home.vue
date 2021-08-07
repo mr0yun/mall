@@ -1,6 +1,6 @@
 <template>
 <div id="home">
-  <nav-bar class='home-nav'><div slot="center">购物车</div></nav-bar>
+  <nav-bar class='home-nav'><div slot="center">首页</div></nav-bar>
   <tab-control :titles="titles" class="control" @tabClick="tabClick" ref="tabControl1" v-show="isTabFixed"/>
     <scroll class="content" ref="scroll" :probeType="3" :pullUpLoad="true" @scroll="contentScroll" @pullingUp="pullUpData">
       <home-swiper :banners="banners" @swiperImgLoad="swiperImgLoad"/>

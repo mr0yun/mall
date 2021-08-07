@@ -32,6 +32,8 @@ import Scroll from 'components/common/scroll/Scroll'
 import {getDetail, getRecommend, Goods, Shop, GoodsParam} from 'network/detail'
 import {debounce} from '@/common/utils'
 import {itemListenerMixin, backTopMixin} from '@/common/mixin'
+import { ADD_CART } from "@/store/mutation-types";
+import {mapActions} from 'vuex'
 
 
 export default {
@@ -84,26 +86,28 @@ export default {
       // 商品的评论信息
       if(data.rate.cRate !== 0){
         this.commentInfo = data.rate.list[0];
-      }
-
-      this.getThemeTopY = debounce(()=>{
-        // DOM渲染完了，但是图片没有加载完成this.$nextTick
-        this.themeTopYs = [];
-        this.themeTopYs.push(0);
-        this.themeTopYs.push(this.$refs.param.$el.offsetTop);
-        this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
-        this.themeTopYs.push(this.$refs.recommend.offsetTop);
-      }, 300);
+      }    
     });
     // 获取推荐信息 
     getRecommend().then((res)=>{
       this.recommends = res.data.list;
     })
   },
+  mounted() {
+    this.getThemeTopY = debounce(()=>{
+      // DOM渲染完了，但是图片没有加载完成this.$nextTick
+      this.themeTopYs = [];
+      this.themeTopYs.push(0);
+      this.themeTopYs.push(this.$refs.param.$el.offsetTop);
+      this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
+      this.themeTopYs.push(this.$refs.recommend.offsetTop);
+    }, 300);
+  },
   destroyed() {
     this.$bus.$off('itemImgLoad', this.itemImgListener);
   },
   methods: {
+    ...mapActions([ADD_CART]),
     imgLoad(){
       this.newRefresh();
       this.getThemeTopY();
@@ -133,9 +137,16 @@ export default {
       product.desc = this.goods.desc;
       product.price = this.goods.realPrice;
       product.iid = this.iid;
+      product.count = 1;
+      product.checked = true;
 
       // 将商品添加到购物车
-      this.$store.commit('addCart', product); 
+      /* this.$store.dispatch('addCart', product).then(res => {
+        console.log(res);
+      });  */
+      this.addCart(product).then(res => {
+        console.log(res);
+      });
     }
   },
 }
