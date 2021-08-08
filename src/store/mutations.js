@@ -1,4 +1,4 @@
-import { ADD_COUNTER, ADD_TO_CART, SELECT_ALL, SELECT_NONE } from './mutation-types'
+import { ADD_COUNTER, ADD_TO_CART, SELECT_ALL, SELECT_NONE, REMOVE_ITEM } from './mutation-types'
 export default {
   [ADD_COUNTER](state, payload) {
     state.cartList[payload].count++;
@@ -15,5 +15,11 @@ export default {
     state.cartList.forEach(element => {
       element.checked = false;
     });
+  },
+  [REMOVE_ITEM](state, payload) {
+    let index = state.cartList.indexOf(payload);
+    if (index !== -1) {
+      state.cartList.splice(index, 1);
+    }
   }
 }

@@ -3,7 +3,7 @@
     <CheckButton class="select-all" @checkBtnClick="checkBtnClick" v-model="isSelectAll"></CheckButton>
     <span>全选</span>
     <span class="total-price">合计: ¥{{cartTotalPrice}}</span>
-    <span class="buy-product">去计算({{cartCount}})</span>
+    <span class="buy-product" @click="calClick">去计算({{cartCount}})</span>
   </div>
 </template>
 
@@ -34,8 +34,13 @@
         } else {
           this.$store.commit(SELECT_NONE);
         }
+      },
+      calClick(){
+        if(this.cartCount === 0){
+          this.$toast.show('未选中任何商品');
+        }
       }
-    }
+    },
 	}
 </script>
 

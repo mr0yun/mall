@@ -11,6 +11,7 @@
       <div class="item-desc">商品描述: {{product.desc}}</div>
       <div class="info-bottom">
         <div class="item-price left">¥{{product.price}}</div>
+        <div class="item-delete right" @click="removeClick">删除</div>
         <div class="item-count right">×{{product.count}}</div>
       </div>
     </div>
@@ -19,6 +20,7 @@
 
 <script>
 import CheckButton from './CheckButton'
+import {REMOVE_ITEM} from '@/store/mutation-types'
 
 export default {
   name: 'CartListItem',
@@ -34,10 +36,14 @@ export default {
     }
   },
   methods: {
-      checkedChange() {
-        this.product.checked = !this.product.checked;
-      }
+    checkedChange() {
+      this.product.checked = !this.product.checked;
+    },
+    removeClick(){
+      // console.log(this.product)
+      this.$store.commit(REMOVE_ITEM, this.product)
     }
+  }
 }
 </script>
 
@@ -110,5 +116,14 @@ export default {
   .info-bottom .item-price {
     color: var(--color-high-text);
     font-weight: bold;
+  }
+
+  .item-delete{
+    background-color: #eee;
+    border: 1px solid #eee;
+    padding:0 6px;
+    margin-left: 2.5rem;
+    border-radius: 4px;
+    color: gray;
   }
 </style>
