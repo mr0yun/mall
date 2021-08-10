@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" ref="wrapper">
+  <div ref="wrapper">
     <div class="content">
       <slot></slot>
     </div>
@@ -18,7 +18,13 @@ export default {
     pullUpLoad:{
       type: Boolean,
       default: false
-    }
+    },
+    data: {
+		  type: Array,
+      default: () => {
+        return []
+      }
+    },
   },
   data(){
     return {
@@ -52,12 +58,16 @@ export default {
     },
     refresh(){
       this.scroll && this.scroll.refresh();
-/*       console.log('---------'); */
     },
     getScrollY(){
       return this.scroll ? this.scroll.y : 0;
     }
   },
+  watch: {
+		data() {
+      setTimeout(this.refresh, 20)
+    }
+  }
 }
 </script>
 

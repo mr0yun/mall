@@ -22,7 +22,7 @@ export default {
   },
   computed:{
     showImage(){
-      return this.goodsItem.image || this.goodsItem.show.img;
+      return this.goodsItem.image || this.goodsItem.img || this.goodsItem.show.img;
     }
   },
   filters: { // 局部过滤器：插值和v-bind 以|分割参数和过滤器，要过滤的数据永远是第一个数据
